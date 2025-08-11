@@ -43,11 +43,18 @@ Por favor, entre em contato com o hóspede manualmente.
     db_manager.save_feedback(chat_id, guest_identifier, guest_name, guest_message, analise)
 
     intencao = analise.get('intencao')
+    sentiment = analise.get('sentimento') # Pega o sentimento para o log
+    category = analise.get('categoria')
+
+    # --- LINHA CORRIGIDA ---
+    # Adicionado o 'sentiment' de volta à mensagem de log.
+    logger.info(f"Análise -> Intenção: {intencao}, Sentimento: {sentiment}, Categoria: {category}")
+
     if intencao == 'Reclamacao/Pedido':
         alerta = f"""
 🚨 NOVO PEDIDO / RECLAMAÇÃO 🚨
 - Hóspede (Quarto/Reserva): <b>{guest_identifier}</b>
-- Categoria: <b>{analise.get('categoria') or 'Não especificada'}</b>
+- Categoria: <b>{category or 'Não especificada'}</b>
 - Mensagem: "{guest_message}"
 """
         try:
@@ -57,4 +64,3 @@ Por favor, entre em contato com o hóspede manualmente.
             logger.error(f"Falha ao enviar alerta para a equipe: {e}")
     elif intencao == 'Fora_De_Escopo':
         await help_command(update, context)
-
