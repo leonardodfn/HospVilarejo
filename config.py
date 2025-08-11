@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
 
+import os
+from dotenv import load_dotenv
+
+# Carrega as variáveis de ambiente do ficheiro .env
+load_dotenv()
+
 # --- Configurações de API e IDs ---
-# Cole suas chaves e IDs aqui.
-TELEGRAM_TOKEN = "8089632629:AAH9_SpVzXFdNYKz8oJIhXk0q_BEdHSl5ww"
-GEMINI_API_KEY = "AIzaSyAqgQ9mV5n-RIQpViF3usZPnvEmc_Xdhf0"
-STAFF_CHAT_ID = "-4967792980"
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+STAFF_CHAT_ID = os.getenv("STAFF_CHAT_ID")
 
 # --- CONTROLE DE ACESSO ---
-# Adicione aqui o Chat ID dos funcionários autorizados.
-ADMIN_CHAT_IDS = [5419356366]
+# Lê os IDs de admin, os separa por vírgula e os converte para inteiros
+admin_ids_str = os.getenv("ADMIN_CHAT_IDS", "")
+ADMIN_CHAT_IDS = [int(admin_id.strip()) for admin_id in admin_ids_str.split(',') if admin_id.strip()]
 
 # --- Gerenciamento de Banco de Dados ---
 DB_FILE = "smartnps_persistent.db"
-
