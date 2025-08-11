@@ -1,0 +1,29 @@
+Ficheiro para ignorar ficheiros e pastas no Git
+# 1. Segredos e Configurações Locais
+Ignora o ficheiro que contém as chaves de API e outras informações sensíveis.
+Esta é a linha mais importante para a segurança do seu projeto.
+.env
+
+# 2. Ambiente Virtual
+Ignora a pasta do ambiente virtual do Python.
+venv/
+.venv/
+
+# 3. Cache e Ficheiros Gerados pelo Python
+Ignora as pastas de cache que o Python cria automaticamente.
+pycache/
+*.pyc
+*.pyo
+*.pyd
+
+# 4. Base de Dados
+Ignora o ficheiro da base de dados. É uma boa prática não versionar
+os dados em si, apenas o código que os gera e manipula.
+*.db
+*.sqlite
+*.sqlite3
+
+# 5. Ficheiros de IDEs e Editores
+Ignora pastas de configuração de editores de código populares.
+.vscode/
+.idea/
